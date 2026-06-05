@@ -1,6 +1,6 @@
 # AI Review Analyzer
 
-Multi-step AI pipeline for analyzing Hungarian e-commerce reviews — built with Streamlit and Groq (LLaMA 3.3 70B).
+Multi-step AI pipeline for analyzing Hungarian e-commerce reviews, built with Streamlit and Groq (LLaMA 3.3 70B).
 
 ## What it does
 
@@ -15,7 +15,7 @@ Multi-step AI pipeline for analyzing Hungarian e-commerce reviews — built with
 | 5. Executive summary | Key strengths, issues, satisfaction rate |
 | 6. Action items | Prioritized improvement tasks with timelines |
 
-**Stack:** Python · Streamlit · Groq API · Plotly · python-dotenv
+**Stack:** Python, Streamlit, Groq API, Plotly, python-dotenv
 
 ## Setup
 
@@ -36,16 +36,11 @@ Edit `.env` and add your Groq API key:
 ```
 GROQ_API_KEY=gsk_...
 ```
-
-Get a free Groq API key at [console.groq.com](https://console.groq.com).
-
 ### 3. Run
 
 ```bash
 streamlit run app.py
 ```
-
-App runs at `http://localhost:8501` by default.
 
 ## Project structure
 
