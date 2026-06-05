@@ -1,67 +1,71 @@
-# AI Review Elemző
+# AI Review Analyzer
 
-Magyar vélemények többlépéses AI elemzése — Streamlit + Groq (LLaMA 3.3 70B).
+Multi-step AI pipeline for analyzing Hungarian e-commerce reviews — built with Streamlit and Groq (LLaMA 3.3 70B).
 
-## Mit csinál?
+## What it does
 
-6 egymást követő LLM-hívásból álló pipeline dolgozza fel a nyers véleményszövegeket:
+6 sequential LLM calls process raw review text end-to-end:
 
-| Lépés | Leírás |
-|-------|--------|
-| 1. Előfeldolgozás | Review-k szétválasztása, normalizálása |
-| 2. Témaextrakció | Visszatérő témák azonosítása (szállítás, ár, minőség…) |
-| 3. Sentiment elemzés | Pozitív / negatív / semleges, 1–5 pontszám review-nként |
-| 4. Csoportosítás | Hasonló témák kategóriákba rendezése |
-| 5. Executive summary | Fő erősségek, problémák, elégedettségi ráta |
-| 6. Akció javaslatok | Prioritizált fejlesztési teendők határidőkkel |
+| Step | Description |
+|------|-------------|
+| 1. Preprocessing | Split and normalize raw review text |
+| 2. Topic extraction | Identify recurring topics (shipping, price, quality…) |
+| 3. Sentiment analysis | Positive / negative / neutral + 1–5 score per review |
+| 4. Grouping | Cluster similar topics into categories |
+| 5. Executive summary | Key strengths, issues, satisfaction rate |
+| 6. Action items | Prioritized improvement tasks with timelines |
 
-**Technológiák:** Python · Streamlit · Groq API · Plotly · python-dotenv
+**Stack:** Python · Streamlit · Groq API · Plotly · python-dotenv
 
-## Beállítás
+## Setup
 
-### 1. Függőségek telepítése
+### 1. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. API kulcs
+### 2. Configure API key
 
 ```bash
 cp .env.example .env
 ```
 
-Szerkeszd a `.env` fájlt, és add meg a Groq API kulcsodat:
+Edit `.env` and add your Groq API key:
 
 ```
 GROQ_API_KEY=gsk_...
 ```
 
-### 3. Indítás
+Get a free Groq API key at [console.groq.com](https://console.groq.com).
+
+### 3. Run
 
 ```bash
 streamlit run app.py
 ```
 
-## Projekt struktúra
+App runs at `http://localhost:8501` by default.
+
+## Project structure
 
 ```
-├── app.py          # Streamlit UI és progress tracking
-├── processing.py   # 6-lépéses pipeline orchestrátor
-├── prompts.py      # Összes LLM prompt (Chain-of-Thought + few-shot)
-├── llm.py          # Groq API wrapper, lazy singleton kliens
-├── utils.py        # Plotly diagramok, badge-ek, JSON export
+├── app.py          # Streamlit UI and progress tracking
+├── processing.py   # 6-step pipeline orchestrator
+├── prompts.py      # LLM prompts (Chain-of-Thought + few-shot)
+├── llm.py          # Groq API wrapper, lazy singleton client
+├── utils.py        # Plotly charts, badges, JSON export
 └── requirements.txt
 ```
 
-## LLM paraméterek
+## LLM parameters
 
-A sidebar-ból futásidőben állítható:
+Configurable at runtime via the sidebar:
 
-- **Temperature** (0–1): alacsonyabb = determinisztikusabb output
-- **Max tokens** (256–2048): egy hívás token limitje
-- **Top-p** (0.1–1.0): nucleus sampling küszöb
+- **Temperature** (0–1): lower = more deterministic output
+- **Max tokens** (256–2048): token limit per LLM call
+- **Top-p** (0.1–1.0): nucleus sampling threshold
 
-## Kimenet
+## License
 
-Az elemzés eredménye letölthető JSON formátumban, és megtekinthető közvetlenül az app-ban.
+This project is licensed under the [MIT License](LICENSE).
